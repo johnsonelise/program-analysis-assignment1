@@ -7376,7 +7376,7 @@ public:
 
   ConditionResult ActOnCondition(Scope *S, SourceLocation Loc, Expr *SubExpr,
                                  ConditionKind CK, bool MissingOK = false);
-
+  ExprResult ActOnfuncloopExpr(SourceLocation StartLoc, Expr *StartExpr, Expr *CondExpr, Expr *EndExpr); // ELISE
   QualType CheckConditionalOperands( // C99 6.5.15
       ExprResult &Cond, ExprResult &LHS, ExprResult &RHS, ExprValueKind &VK,
       ExprObjectKind &OK, SourceLocation QuestionLoc);
