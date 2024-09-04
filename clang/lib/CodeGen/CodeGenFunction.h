@@ -5153,6 +5153,7 @@ public:
   /// Set the minimum required accuracy of the given sqrt operation based on
   /// CodeGenOpts.
   void SetDivFPAccuracy(llvm::Value *Val);
+  llvm::Value *EmitfuncloopExpr(const clang::funcloopExpr *E); // ELISE
 
   /// Set the codegen fast-math flags.
   void SetFastMathFlags(FPOptions FPFeatures);
