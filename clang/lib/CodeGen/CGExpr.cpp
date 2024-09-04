@@ -6186,6 +6186,30 @@ void CodeGenFunction::SetDivFPAccuracy(llvm::Value *Val) {
   }
 }
 
+// ELISE
+llvm::Value *CodeGenFunction::EmitfuncloopExpr(const funcloopExpr *E) {
+    llvm::Value *StartVal = EmitScalarExpr(E->getStartExpr());
+    llvm::Value *EndVal = EmitScalarExpr(E->getEndExpr());
+    llvm::Value *CondVal = EmitScalarExpr(E->getCondExpr());
+
+    llvm::BasicBlock *LoopBB = createBasicBlock("funcloop.loop");
+    llvm::BasicBlock *ExitBB = createBasicBlock("funcloop.exit");
+
+    Builder.CreateBr(LoopBB);
+    EmitBlock(LoopBB);
+
+    llvm::Value *Cmp = Builder.CreateICmpEQ(StartVal, EndVal);
+
+    Builder.CreateCondBr(Cmp, ExitBB, LoopBB);
+
+    StartVal = Builder.CreateAdd(StartVal, llvm::ConstantInt::get(StartVal->getType(), 1));
+
+    EmitBlock(ExitBB);
+
+    return CondVal;
+}
+
+
 namespace {
   struct LValueOrRValue {
     LValue LV;
