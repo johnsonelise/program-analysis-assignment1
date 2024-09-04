@@ -20208,6 +20208,20 @@ Sema::ConditionResult Sema::ActOnCondition(Scope *S, SourceLocation Loc,
                          CK == ConditionKind::ConstexprIf);
 }
 
+  /// ELISE
+  ExprResult Sema::ActOnfuncloopExpr(SourceLocation StartLoc, Expr *StartExpr, Expr *CondExpr, Expr *EndExpr) {
+      // Ensure all expressions are of integer type.
+      if (!StartExpr->getType()->isIntegerType() ||
+          !CondExpr->getType()->isIntegerType() ||
+          !EndExpr->getType()->isIntegerType()) {
+          Diag(StartLoc, diag::err_typecheck_expect_int) << StartExpr->getType();
+          return ExprError();
+      }
+
+      SourceLocation EndLoc = EndExpr->getEndLoc();
+      return new (Context) funcloopExpr(StartExpr, CondExpr, EndExpr, Context.IntTy, StartLoc, EndLoc);
+  }
+
 namespace {
   /// A visitor for rebuilding a call to an __unknown_any expression
   /// to have an appropriate type.
