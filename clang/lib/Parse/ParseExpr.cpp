@@ -4017,3 +4017,34 @@ ExprResult Parser::ParseAvailabilityCheckExpr(SourceLocation BeginLoc) {
   return Actions.ObjC().ActOnObjCAvailabilityCheckExpr(
       AvailSpecs, BeginLoc, Parens.getCloseLocation());
 }
+
+
+// ELISE
+ExprResult Parser::ParsefuncloopExpr() {
+    assert(Tok.is(tok::l_square) && "Expected '[[' to start RangeExpr");
+
+    SourceLocation StartLoc = ConsumeToken(); // consume '[['
+
+    ExprResult StartExpr = ParseExpression();
+    if (StartExpr.isInvalid())
+        return ExprError();
+
+    if (!ExpectAndConsume(tok::comma))
+        return ExprError();
+
+    ExprResult CondExpr = ParseExpression();
+    if (CondExpr.isInvalid())
+        return ExprError();
+
+    if (!ExpectAndConsume(tok::comma))
+        return ExprError();
+
+    ExprResult EndExpr = ParseExpression();
+    if (EndExpr.isInvalid())
+        return ExprError();
+
+    if (!ExpectAndConsume(tok::r_square))
+        return ExprError();
+
+    return Actions.ActOnfuncloopExpr(StartLoc, StartExpr.get(), CondExpr.get(), EndExpr.get());
+}

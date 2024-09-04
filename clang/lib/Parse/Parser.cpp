@@ -936,6 +936,23 @@ Parser::ParseExternalDeclaration(ParsedAttributes &Attrs,
     }
     SingleDecl = ParseObjCMethodDefinition();
     break;
+  // case tok::l_functionloop: // ELISE
+  //   int funcloopflag = false;
+  //   ConsumeToken();
+  //   if (HasFlagsSet(Flags, StopAtCodeCompletion))
+  //     funcloopflag = SkipUntil(tok::r_square, StopAtCodeCompletion);
+  //   else
+  //     funcloopflag = SkipUntil(tok::r_square);
+
+  //   if(funcloopflag == false){
+  //     Diag(Tok, diag::err_expected_external_declaration); // ELISE
+  //     return nullptr;
+  //   }
+       // ok so even number of [[ ]], now i need to create a new node HERE TODO
+  //   // potential call parser
+  // case tok::r_functionloop:
+  //   Diag(Tok, diag::err_expected_external_declaration); // ELISE
+  //   return nullptr;
   case tok::code_completion:
     cutOffParsing();
     if (CurParsedObjCImpl) {
