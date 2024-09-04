@@ -3092,6 +3092,7 @@ private:
 
   std::optional<AvailabilitySpec> ParseAvailabilitySpec();
   ExprResult ParseAvailabilityCheckExpr(SourceLocation StartLoc);
+  ExprResult ParsefuncloopExpr();
 
   void ParseExternalSourceSymbolAttribute(IdentifierInfo &ExternalSourceSymbol,
                                           SourceLocation Loc,
