@@ -7141,6 +7141,48 @@ private:
   friend class ASTStmtWriter;
 };
 
+  // ELISE
+
+  class funcloopExpr : public Expr {
+  private:
+      Expr *StartExpr;
+      Expr *CondExpr;
+      Expr *EndExpr;
+      SourceLocation StartLoc;
+      SourceLocation EndLoc;
+
+  public:
+      funcloopExpr(Expr *StartExpr, Expr *CondExpr, Expr *EndExpr, QualType T, SourceLocation StartLoc, SourceLocation EndLoc)
+        : Expr(funcloopExprClass, T, VK_XValue, OK_Ordinary),
+          StartExpr(StartExpr), CondExpr(CondExpr), EndExpr(EndExpr),
+          StartLoc(StartLoc), EndLoc(EndLoc) {}
+
+      Expr *getStartExpr() const { return StartExpr; }
+      void setStartExpr(Expr *E) { StartExpr = E; }
+
+      Expr *getCondExpr() const { return CondExpr; }
+      void setCondExpr(Expr *E) { CondExpr = E; }
+
+      Expr *getEndExpr() const { return EndExpr; }
+      void setEndExpr(Expr *E) { EndExpr = E; }
+
+      SourceLocation getBeginLoc() const { return StartLoc; }
+      SourceLocation getEndLoc() const { return EndLoc; }
+
+      static bool classof(const Stmt *T) {
+          return T->getStmtClass() == funcloopExprClass;
+      }
+
+      static bool classof(const Expr *E) {
+          return E->getStmtClass() == funcloopExprClass;
+      }
+
+      child_range children() {
+        return child_range(reinterpret_cast<Stmt **>(&StartExpr), reinterpret_cast<Stmt **>(&EndExpr + 1));
+      }
+
+  };
+
 } // end namespace clang
 
 #endif // LLVM_CLANG_AST_EXPR_H

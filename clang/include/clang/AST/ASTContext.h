@@ -2932,6 +2932,9 @@ public:
                       SmallVectorImpl<QualType> &ExceptionTypeStorage,
                       bool AcceptDependent);
 
+  // ELISE
+// funcloopExpr CreatefuncloopExpr(Expr *LHS, Expr *RHS, QualType T);
+
   // For two "same" types, return a type which has
   // the common sugar between them. If Unqualified is true,
   // both types need only be the same unqualified type.
