@@ -13225,6 +13225,13 @@ ASTContext::mergeExceptionSpecs(FunctionProtoType::ExceptionSpecInfo ESI1,
   llvm_unreachable("invalid ExceptionSpecificationType");
 }
 
+// // ELISE
+// funcloopExpr *ASTContext::CreatefuncloopExpr(Expr *LHS, Expr *RHS, QualType T) {
+//   void *Mem = Allocate(sizeof(funcloopExpr));
+//   return new (Mem) funcloopExpr(LHS, RHS, T);
+// }
+
+
 static QualType getCommonNonSugarTypeNode(ASTContext &Ctx, const Type *X,
                                           Qualifiers &QX, const Type *Y,
                                           Qualifiers &QY) {
