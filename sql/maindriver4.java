@@ -12,7 +12,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
 
-class test
+class test4
 {
     public static void main(String []args)
     {
@@ -26,10 +26,10 @@ class test
                           "SELECT NAME, ID FROM EMPLOYEES;" + 
                           "SELECT 4 + (2 + 1) AS ABC;" +
                           "SELECT 7 + 8 AS SUM;" +
-                          "SELECT HIPPO FROM EMPLOYEES;" + 
+                        //   "SELECT HIPPO FROM EMPLOYEES;" + 
                         //   "SELECT 'hello' + 5 AS DEF;" +
                         //   "SELECT 6 + 5.5 AS GHI;" +
-                        //   "SELECT 'hello' + (5 + 'elise') AS JKL;" +
+                          "SELECT 'hello' + (5 + 'elise') AS JKL;" +
                           "SELECT 5 + (3 + 2) AS MNO;"));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         SQLiteParser parser = new SQLiteParser(tokens);
