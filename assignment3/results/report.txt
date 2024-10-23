@@ -1,0 +1,9 @@
+           ----- STARTING OUTPUT -----           
+------------- STARTING MEMORIZATION --------=----
+Memorizing homework3.AElise.max(1, 2):2.
+-------------  ENDING MEMORIZATION -------------
+
+
+------------ STARTING CODE COVERAGE ------------
+homework3.AElise.max(II)I: 19
+------------  ENDING CODE COVERAGE ------------

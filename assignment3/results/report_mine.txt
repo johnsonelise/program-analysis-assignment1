@@ -1,0 +1,51 @@
+           ----- STARTING OUTPUT -----           
+------------- STARTING MEMORIZATION --------=----
+Memorizing homework3.AElise.max(1, 2):2.
+Memorizing homework3.AElise.min(5, 3):3.
+homework3.AElise.breaker(1, 2, 3):returnValue is not memoizable.
+Memorizing homework3.AElise.obj_input(2, 3):5.
+Returning memoized return value for homework3.AElise.obj_input(2, 3):5.
+Returning memoized return value for homework3.AElise.obj_input(2, 3):5.
+Memorizing homework3.AElise.obj_input(2, 5):7.
+Returning memoized return value for homework3.AElise.obj_input(2, 5):7.
+Returning memoized return value for homework3.AElise.obj_input(2, 5):7.
+Memorizing homework3.BElise.add(1, 3):4.
+Memorizing homework3.BElise.add(1, 5):6.
+Memorizing homework3.BElise.add(2, 3):5.
+Memorizing homework3.BElise.sub(3, 1):2.
+Memorizing homework3.BElise.sub(3, 0):3.
+Memorizing homework3.CElise.mult(1, 5):5.
+Memorizing homework3.CElise.mult(3, 4):12.
+Memorizing homework3.CElise.mult(2, 5):10.
+Returning memoized return value for homework3.CElise.mult(2, 5):10.
+Memorizing homework3.CElise.div(5, 1):5.
+Memorizing homework3.CElise.div(6, 2):3.
+Memorizing homework3.CElise.div(6, 3):2.
+Memorizing homework3.CElise.div(3, 1):3.
+-------------  ENDING MEMORIZATION -------------
+
+
+------------ STARTING CODE COVERAGE ------------
+homework3.AElise.<init>()V: 4
+homework3.AElise.<init>()V: 5
+homework3.AElise.<init>()V: 7
+homework3.AElise.<init>(II)V: 10
+homework3.AElise.<init>(II)V: 11
+homework3.AElise.<init>(II)V: 4
+homework3.AElise.<init>(II)V: 5
+homework3.AElise.<init>(II)V: 8
+homework3.AElise.<init>(II)V: 9
+homework3.AElise.breaker(III)Ljava/lang/Object;: 24
+homework3.AElise.max(II)I: 19
+homework3.AElise.min(II)I: 14
+homework3.AElise.min(II)I: 15
+homework3.AElise.obj_input(Lhomework3/AElise;)I: 28
+homework3.BElise.<init>()V: 4
+homework3.BElise.<init>()V: 5
+homework3.BElise.<init>()V: 7
+homework3.BElise.add(II)I: 13
+homework3.BElise.sub(II)I: 17
+homework3.CElise.div(II)I: 12
+homework3.CElise.div(II)I: 13
+homework3.CElise.mult(II)I: 8
+------------  ENDING CODE COVERAGE ------------
