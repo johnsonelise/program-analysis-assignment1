@@ -16,12 +16,15 @@ public class HelloWorld_elise {
         AElise.min(5, 3);
 
         AElise.breaker(1,2,3);
+        AElise.breaker2(4,5,6);
+
+        AElise.no_ins();
         AElise.obj_input(new AElise(2, 3));
         AElise.obj_input(new AElise(2, 3));
         AElise.obj_input(new AElise(2, 3));
-        AElise.obj_input(new AElise(2, new BElise().b));
-        AElise.obj_input(new AElise(2, new BElise().b));
-        AElise.obj_input(new AElise(2, new BElise().b));
+        AElise.obj_input(new AElise(4, new BElise().b));
+        AElise.obj_input(new AElise(4, new BElise().b));
+        AElise.obj_input(new AElise(4, new BElise().b));
 
         // BElise
         BElise.add(1,3 );

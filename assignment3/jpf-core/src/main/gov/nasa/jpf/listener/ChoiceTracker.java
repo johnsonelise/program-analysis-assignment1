@@ -38,6 +38,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Stack;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -53,11 +54,13 @@ public class ChoiceTracker extends ListenerAdapter {
   private HashSet<String> lines;
   private ArrayList<Object> curr_parameters;
   private int curr_args = 0;
+  private Stack<Integer> stack;
 
   public ChoiceTracker (Config config, JPF jpf) {
     memorized = new HashMap<>();
     lines   = new HashSet<>();
     curr_parameters = new ArrayList<>();
+    stack = new Stack<>();
 
     System.out.println("Running Elise's listener");
 
@@ -92,7 +95,6 @@ public class ChoiceTracker extends ListenerAdapter {
       
       if (frame != null && enteredMethod != null) {
           int numArgs = enteredMethod.getNumberOfArguments();  // Get number of arguments
-          // System.out.println("method: " + methodName.split("\\(")[0] + "num args: " + numArgs + "args: " + curr_parameters.toString());
           curr_args = numArgs;
           
           for (int i = 0; i < numArgs; i++) {
@@ -100,26 +102,34 @@ public class ChoiceTracker extends ListenerAdapter {
               // System.out.println("class: " + argValue.getClass().toString() + "\t\t\tvalue: " + argValue);
               if(!argValue.getClass().toString().contains("Dynamic")){
                 curr_parameters.add(argValue);
+                // my_writer.println("curr param in num arg loop: " + curr_parameters.toString());
               }
           }
+          stack.push(numArgs);
+          // my_writer.println("num args: " + numArgs);
           // System.out.println();
-
           String memorize_string = methodName.split("\\(")[0] + "(";
           // System.out.print("Memoizing " + methodName.split("\\(")[0] + "(" );
           for(int i = 0; i < curr_parameters.size()-1; i++){
             // System.out.print(curr_parameters.get(i) + ", ");
             memorize_string = memorize_string + (curr_parameters.get(i) + ", ");
           }
-          // System.out.print(curr_parameters.get(curr_parameters.size()-1));
-          // System.out.println( "):" + returnValue + ".");
+
           if(curr_parameters.size() != 0){
             memorize_string = memorize_string + (curr_parameters.get(curr_parameters.size()-1) +  ")");
+            // System.out.print(curr_parameters.get(curr_parameters.size()-1));
+            // System.out.println( "):" + ".");
           }
 
           if(memorized.containsKey(memorize_string)){
             // System.out.println("Returning memoized return value for " + memorize_string + ":" + memorized.get(memorize_string) + ".");
             my_writer.println( "Returning memoized return value for " + memorize_string + ":" + memorized.get(memorize_string) + ".");
             currentThread.skipInstruction();
+            return;
+          // }else if(methodName.contains("obj_input")){
+            // System.out.println(memorized.toString());
+            // System.out.println(memorize_string);
+            // System.out.println("ERROR");
           }
       }
   }
@@ -133,9 +143,12 @@ public class ChoiceTracker extends ListenerAdapter {
         return;
       }
 
+      int temp = stack.pop();
+
       StackFrame frame = currentThread.getTopFrame();
       
       if (frame != null && exitedMethod.getReturnType() != "void" && exitedMethod.getReturnType() != "V" && (exitedMethod.isStatic() == true)) {
+      // if (frame != null && exitedMethod.getReturnType() != "void" && exitedMethod.getReturnType() != "V") {
         String returnType = exitedMethod.getReturnType();
         Object returnValue = null;
 
@@ -159,17 +172,17 @@ public class ChoiceTracker extends ListenerAdapter {
           returnValue = frame.peekLong();  // For long return type
 
         } else {
-          // System.out.print(methodName.split("\\(")[0] + "(" );
+          
           my_writer.print( methodName.split("\\(")[0] + "(" );
 
-          for(int i = 0; i < curr_parameters.size()-1; i++){
+          for(int i = 0; i < temp-1; i++){
             // System.out.print(curr_parameters.get(i) + ", ");
             my_writer.print( curr_parameters.get(i) + ", ");
           }
 
-          if(curr_parameters.size() != 0){
+          if(temp != 0){
             // System.out.print(curr_parameters.get(curr_parameters.size()-1));
-            my_writer.print( curr_parameters.get(curr_parameters.size()-1));
+            my_writer.print( curr_parameters.get(temp-1));
           }
 
           // System.out.println("):returnValue is not memoizable.");
@@ -182,20 +195,21 @@ public class ChoiceTracker extends ListenerAdapter {
         
         String memorize_string = methodName.split("\\(")[0] + "(";
         // System.out.print("Memoizing " + methodName.split("\\(")[0] + "(" );
+        // my_writer.println("temp: " + temp);
         for(int i = 0; i < curr_parameters.size()-1; i++){
           // System.out.print(curr_parameters.get(i) + ", ");
           memorize_string = memorize_string + (curr_parameters.get(i) + ", ");
         }
-        // System.out.print(curr_parameters.get(curr_parameters.size()-1));
         // System.out.println( "):" + returnValue + ".");
-        if(curr_parameters.size() != 0){
-          memorize_string = memorize_string + (curr_parameters.get(curr_parameters.size()-1) +  ")");
+        if(temp != 0){
+          // System.out.println(curr_parameters.get(curr_parameters.size()-1));
+          memorize_string = memorize_string + (curr_parameters.get(curr_parameters.size()-1));
         }
+        memorize_string = memorize_string + ")";
 
         if(!memorized.containsKey(memorize_string)){
-          memorized.put(memorize_string, returnValue.toString());
 
-          // System.out.println("Memorizing " + memorize_string + ":" + returnValue + ".");
+          memorized.put(memorize_string, returnValue.toString());
           my_writer.println("Memorizing " + memorize_string + ":" + returnValue + ".");
 
         }

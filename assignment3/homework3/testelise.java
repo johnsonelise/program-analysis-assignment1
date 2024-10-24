@@ -5,16 +5,16 @@ import homework3.BElise;
 import homework3.CElise;
 
 
-public class test2 {
+public class testelise {
     public static void main(String[] args) {
 
         System.out.println("Hello, World! test2");
-        // System.out.println("And I'm running my main test file!");
+        System.out.println("And I'm running my main test file!");
 
         // AElise
         AElise.max(1, 2);
         
-        System.out.println("test2 done now!");
+        System.out.println("test2 done!");
 
     }
 }

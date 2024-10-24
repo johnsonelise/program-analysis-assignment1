@@ -20,8 +20,16 @@ public class AElise {
         return a;
     }
 
+    public static int no_ins(){
+        return 2;
+    }
+
     public static Object breaker(int a, int b, int c){
         return new AElise();
+    }
+
+    public static Object breaker2(int a, int b, int c){
+        return new AElise(5,7);
     }
 
     public static int obj_input(AElise in_elise){

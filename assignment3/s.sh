@@ -19,14 +19,16 @@ java -cp ./jpf-core/build/jpf.jar gov.nasa.jpf.tool.RunJPF ./jpf-core/HelloWorld
 
 sed -i 's/report_mine.txt\");/report.txt\");/g' ./jpf-core/src/main/gov/nasa/jpf/listener/ChoiceTracker.java
  
-echo "Done running my test files."
+echo "Done running my test files.
+
+"
 
 echo "note: please place your test files in homework3 folder"
 read -p "Enter your test file name: " filename  # The '-p' flag allows you to provide a prompt
 
 cd ./homework3
 
-javac "$filename".java
+javac AElise.java BElise.java CElise.java "$filename.java"
 
 cd ./../
 
