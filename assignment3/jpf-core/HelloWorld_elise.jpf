@@ -1,0 +1,26 @@
+# Configuration file for Java PathFinder
+
+# Specify the target class (fully qualified name of the Java class to be verified)
+target=homework3.HelloWorld_elise
+
+# Specify the classpath (location of the compiled class files)
+# classpath=/home/elise/projects/jpf/jpf-core/build/jpf.jar:/home/elise/projects/jpf/jpf-core/build/classes:/home/elise/projects/jpf/jpf-core:/media/elise/OS/Users/johns/OneDrive/Documents/school/program-analytics:.
+classpath=./jpf-core/build/jpf.jar:./jpf-core/build/classes:./jpf-core:.
+
+#classpath=/home/elise/projects/jpf/jpf-core/build/classes:/home/elise/projects/jpf/jpf-core/homework3:/home/elise/projects/jpf/jpf-core/build/jpf.jar:/media/elise/OS/Users/johns/OneDrive/Documents/school/program-analytics:.
+#classpath=/home/elise/projects/jpf/jpf-core/build/classes:/home/elise/projects/jpf/jpf-core/homework3:/home/elise/projects/jpf/jpf-core/build/jpf.jar:/media/elise/OS/Users/johns/OneDrive/Documents/school/program-analytics:.
+
+
+# (Optional) Output file for logging results
+report.console.file=HelloWorld-elise-output.txt
+
+# (Optional) Choose a listener for property violations (e.g., deadlocks, assertions)
+#listener=media.elise.OS.Users.johns.OneDrive.Documents.school.program-analytics.homework3.elise_listener
+#listener=homework3.EliseListener
+listener=gov.nasa.jpf.listener.ChoiceTracker
+#listener=homework3.EliseListener
+
+
+jpf.report.console.level=ALL
+vm.classpath.logging=true
+
