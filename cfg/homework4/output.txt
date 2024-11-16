@@ -1,0 +1,9 @@
+-------- STARTING CFG OUTPUT --------
+ID: 0 => 1, 2
+ID: 1 => 3
+ID: 2 => 3
+ID: 3 => null
+DOM Set for Block 0: 0
+DOM Set for Block 1: 0, 1
+DOM Set for Block 2: 0, 2
+DOM Set for Block 3: 0, 3
