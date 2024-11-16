@@ -218,8 +218,10 @@ public class cfgtool {
                 }
             }
 
-            // blocks.add(block);
-
+            if(blocks.size() == 0){
+                blocks.add(block);
+            }
+            
             for (Map.Entry<Integer, ArrayList<org.objectweb.asm.Label>> jump_from_block : labelmap.entrySet()) {
                 for(Map.Entry<org.objectweb.asm.Label, ArrayList<Integer>> jump_to_block : mappings.entrySet()){
                     // goes through both, now need to loop through labels to see if they match
